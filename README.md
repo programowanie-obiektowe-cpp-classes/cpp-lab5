@@ -26,3 +26,6 @@ każdy element należy do komórki, która przechowuje wskaźnik do kolejnej kom
 W konsekwencji, aby dostać się do *i*-tego elementu musimy przejść przez *i*−1 elementów go poprzedzających.
 - [`std::deque`](https://en.cppreference.com/w/cpp/container/deque) - dwukierunkowa kolejka (możemy dodawać elementy na końcu i na początku).
 Typowe implementacje alokują pamięć blokami (np. na 16 elementów, nie na 1).
+
+## `std::vector`
+Kontenerem, po który sięgamy najczęściej, jest wektor.
