@@ -12,9 +12,14 @@ Aby móc skupić się na zachowaniu kontenerów, a nie szczegółach typów, kt�
 Zadania zebrane poniżej zakładają, że czytelnik ma do niego dostęp.
 
 ## Wybrane typy kontenerów
-- [std::vector](https://en.cppreference.com/w/cpp/container/vector) - Dynamicznie alokuje ciągły blok pamięci na trzymane obiekty.
+- [std::vector](https://en.cppreference.com/w/cpp/container/vector) - dynamicznie alokuje ciągły blok pamięci na trzymane obiekty.
 Po zapełnieniu alokuje nowy, większy blok pamięci i przepisuje do niego elementy.
-- [std::array](https://en.cppreference.com/w/cpp/container/array) - Statycznie alokuje blok pamięci o rozmiarze określonym przez parametr szablonu.
+- [std::array](https://en.cppreference.com/w/cpp/container/array) - statycznie alokuje blok pamięci o rozmiarze określonym przez parametr szablonu.
 Pozwala na łatwe kopiowanie zawartości (ma dobrze zdefiniowane metody specjalne).
 - [std::map](https://en.cppreference.com/w/cpp/container/map) - przechowuje pary klucz-element (typy obu określone przez parametry szablonu).
 Pozwala na dostęp do elementów poprzez klucz, np. `mapa_ocen["Janina Kowalska"] = 5`.
+- [std::list](https://en.cppreference.com/w/cpp/container/list) - rozprasza elementy w pamięci.
+każdy element należy do komórki, która przechowuje wskaźnik do kolejnej komórki (ostatnia komórka wskazuje na `nullptr`).
+W konsekwencji, aby dostać się do *i*-tego elementu musimy przejść przez *i*−1 elementów go poprzedzających.
+- [std::deque](https://en.cppreference.com/w/cpp/container/deque) - dwukierunkowa kolejka (możemy dodawać elementy na końcu i na początku).
+Typowe implementacje alokują pamięć blokami (np. na 16 elementów, nie na 1).
