@@ -62,7 +62,7 @@ Warto zaznaczyć, że tak naprawdę `push_back` woła `emplace_back` - wykorzyst
 
 ### Indeksowanie
 Indeksowanie po wektorze odbywa się przy pomocy operatora `[ ]`, dokładnie tak jak po zwykłej tablicy.
-Sięgnięcie poza zakres (`v[i]`, gdzie `i > v.size()`) jest nielegalne (zachowanie analogiczne do tradycyjnej tablicy).
+Sięgnięcie poza zakres (`v[i]`, gdzie `i >= v.size()`) jest nielegalne (zachowanie analogiczne do tradycyjnej tablicy).
 
 ### Usuwanie elementów
 Ostatni element wektora możemy usunąć przy pomocy metody `pop_back`.
@@ -85,7 +85,7 @@ Dlaczego tak/nie?
 #### Zadanie 3
 Stwórz przy pomocy konstruktora nr 3 wektor 100 `int`ów o wartości 42.
 Wyświetl jego długość i pojemność.
-Wykonaj program 2 razy, raz używając do inicjalizacji nawiasów `()`, raz `{}`.
+Wykonaj program 2 razy, raz używając do inicjalizacji nawiasów `()`, a raz `{}`.
 Jakie będą efekty?
 Dlaczego tak się dzieje?
 Zapytaj osobę prowadzącą zajęcia.
