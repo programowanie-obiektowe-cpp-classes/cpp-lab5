@@ -164,19 +164,117 @@ Czy zmienił się adres ostatniego elementu?
 Dlaczego tak/nie?
 
 #### Zadanie 11
-Sprawdź, czy lista ma zdefiniowany operator nawiasów kwadratowych (indeksowania)?
+Sprawdź, czy lista ma zdefiniowany operator nawiasów kwadratowych (indeksowania).
 Jak sądzisz, dlaczego tak jest?
 
 ## Iteratory
-Jak zobaczyliśmy w zadaniu 11, 
+Jak zobaczyliśmy w zadaniu 11, lista nie ma zdefiniowanego operatora `[ ]`.
+Aby dostać się do jej elementów, musimy użyć iteratorów.
+Iterator jest w pewnym koncepcyjnie podobny do wskaźnika, gdyż jego zadaniem jest wskazywanie na elementy kontenera (nie tylko listy).
+Iteratorem nazywamy obiekt klasy, która ma zdefiniowane następujące operatory:
+- operator dereferencji (`*`) - dereferencjonując operator uzyskujemy dostęp do elementu, na który wskazuje
+- (opcjonalnie) operator `->` - pozwala na dostęp do pól i metod elementów (zdefiniowany dla naszej wygody, możemy to także osiągnąć przy pomocy operatora dereferencji)
+- operator pre- lub post-inkrementacji (`++`) - po inkrementacji, iterator wskazuje na następny element kontenera
+- operatory porównania (`==`, `!=`) - porównują, czy dwa iteratory wskazują na ten sam element
+- (opcjonalnie) operator pre- lub post-dekrementacji (`--`) - wtedy nazywamy operator dwukierunkowym (*bidirectional*), pełni on rolę analogiczną do operatora `++`
+- (opcjonalnie) operator `+` lub `+=` przyjmujący liczbę całkowitą - wtedy nazywamy go iteratorem losowego dostępu (*random access*), operator ten pozwala nam przesunąć iterator do przodu lub do tyłu o dowolną liczbę elementów
 
+Jeżeli przyjrzymy się powyższej specyfikacji, możemy dostrzec, że wskaźniki są iteratorami losowego dostępu.
+Kontenerem, na elementy którego wskazują, jest cała przestrzeń pamięci naszego komputera (podobieństwo do nazwy RAM jest nieprzypadkowe!).
+
+Nas będą jednak iteratory odpowiadające konkretnym kontenerom.
+Wszystkie kontenery STL posiadaja zdefiniowane wewnątrz klasy iteratorów.
+Na przykład, najprostszym iteratorem wektora elementów typu `T` jest klasa `std::vector<T>::iterator`.
+Sam typ nie jest oczywiście wystarczający - potrzebujemy konkretnych obiektów.
+Do ich otrzymania służą metody kontenerów: `begin` i `end` (oraz ich dodatkowe odmiany, o których niżej).
+`begin` zwraca iterator do pierwszego elementu wektora, `end` zwraca iterator **za** ostatni element.
+Możemy więc już zobaczyć, jak działają iteratory w praktyce:
+```C++
+std::vector<int>           v{1, 2, 3};
+std::vector<int>::iterator it = v.begin();
+
+// Jawnie drukujemy zawartość wektora
+std::cout << *it++;
+std::cout << *it++;
+std::cout << *it;
+```
+
+#### Zadanie 12
+Wykonaj ponownie zadanie 6, tym razem używając w pętli `for` opartej o iteratory, a nie bezpośrednio indeksy i opeator `[ ]`.
+Warunkiem zakończenia pętli powina być równość bieżącego iteratora oraz obiektu zwróconego przez metodę `end`.
+
+#### Zadanie 13
+Wydrukuj całą zawartośc listy stworzonej w zadaniu 10.
+
+#### Zadanie 14
+Teraz wydrukuj zawartość listy od tyłu.
+wykorzystaj fakt, że `std::list` implementuje listę dwukierunkową.
+
+W zadaniu 14 nieco niewygodna była konieczność indeksowania od iteratora poprzedzającego `list.end()`.
+Prowadzi ona do dość subtelnego bugu: gdyby nasza lista była pusta, mielibyśmy nieskończoną pętle!
+Jeżeli kontener jest pusty, to iterator do pierwszego elementu oraz **za** pierwszy element są równe.
+Dekrementacja iteratora poprzedzającego `list.end()` nie doprowadzi zatem nigdy do iteratora `list.begin()`.
+Ponieważ problem trawersowania kontenerów od końca jest dość powszechny, biblioteka standardowa oferuje mechanizm, który to ułatwia: iteratory odwrotne (``*reverse iterator*).
+Ideę ich działania zobrazowano poniżej.
+
+![iterators.png](graphics/iterators.png)
+
+Ostatni rodzaj iteratora, jaki poznamy, to iterator `const`.
+Nie oznacza to, że nie możemy zmieniać jego wartości (taki iterator nie jest szczególnie przydatny, poza tym możemy go stworzyć po prostu deklarując np. `const std::vector<int>::iterator it = ...`), oznacza to, że nie możemy zmienić wartości elementu, na który wskazuje.
+Możemy za to wskazać nim na inny element (tak samo jak każdym innym operatorem).
+Iteratory `const` są przydatne, gdy trawersujemy kontener celem odczytu elementów - odbieramy sobie wtedy możliwość nieumyślnej zmiany ich wartośi.
+Podsumowując, poznaliśmy następujące typy iteratorów:
 - (forward) iterator - metody `begin()` i `end()`
 - reverse iterator - metody `rbegin()` i `rend()`
 - `const` (forward) iterator - metody `cbegin()` i `cend()`
 - `const` reverse iterator - metody `crbegin()` i `crend()`
 
-![iterators.png](graphics/iterators.png)
+#### Zadanie 15
+Wykonaj ponownie zadanie 14, tym razem używając iteratora typu `std::list<int>::const_reverse_iterator`
 
+#### Zadanie 16
+Wykonaj ponownie zadanie 15, tym razem zwiększając zawarte w liście liczby o 1 przed ich wydrukowaniem.
+Czy kod się skompiluje?
+Jaki iterator powinien teraz zostać użyty?
+
+## Na deser
 ### `auto`
+W rodzinie języków C/C++ nie możemy przeciążać funkcji po typach, które zwraca.
+Oznacza to, że jeżeli podamy do jakiejś funkcji argumenty konkretnego typu, to możemy (a co ważniejsze kompilator może) jednoznacznie stwierdzić, jaki będzie typ zwróconej wartości.
+Aby skrócić kod, od standardu C++11 możemy więc zastąpić typ zwracanego przez funkcję obiektu słowem `auto`.
+Na przykład, kod:
+```C++
+std::vector<int> v{1, 2, 3};
+for (std::vector<int>::const_reverse_iterator it = v.crbegin(); it != v.crend(); ++it)
+    std::cout << *it;
+```
+możemy skrócić do:
+```C++
+std::vector<int> v{1, 2, 3};
+for (auto it = v.crbegin(); it != v.crend(); ++it)
+    std::cout << *it;
+```
+Zaoszczędzony na jego pisaniu czas możemy poświęcić na przyjemniejsze czynności, np. głaskanie psów.
 
-### Range-based `for` loop
+### Range-based for loop
+Ostatnią sztuczką C++11 skracającą kod, jaką dziś poznamy, będzie *ranged-based for loop* (tłumacznie na polski nieznane jest autorowi).
+Najczęstszą pętlą, jaką piszemy, jest przejście w kolejności po całej rozpiętości kontenera (od `begin` do `end`):
+```C++
+std::vector<int> v{1, 2, 3};
+for (auto it = v.begin(); it != v.end(); ++it)
+    std::cout << *it;
+```
+Jeżeli kontener wspiera metody `begin` i `end`, możemy powyższy od zastąpić:
+```C++
+std::vector<int> v{1, 2, 3};
+for(int e : v)
+    std::cout << e;
+```
+W powyższym kodzie wykonujemy kopię każdego elementu `v` i drukujemy ją do konsoli.
+Jeżeli nie chcemy wykonywać kopii, możemy napisać:
+```C++
+for(const int& e : v)
+    std::cout << e;
+```
+#### Zadanie 17
+Wykonaj zadania 12 i 13 używając ranged-based for loop.
