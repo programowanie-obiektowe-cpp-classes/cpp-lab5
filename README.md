@@ -22,7 +22,7 @@ Pozwala na łatwe kopiowanie zawartości (ma dobrze zdefiniowane metody specjaln
 - [`std::map`](https://en.cppreference.com/w/cpp/container/map) - przechowuje pary klucz-element (typy obu określone przez parametry szablonu).
 Pozwala na dostęp do elementów poprzez klucz, np. `mapa_ocen["Janina Kowalska"] = 5`.
 - [`std::list`](https://en.cppreference.com/w/cpp/container/list) - rozprasza elementy w pamięci.
-każdy element należy do komórki, która przechowuje wskaźnik do kolejnej komórki (ostatnia komórka wskazuje na `nullptr`).
+każdy element należy do komórki, która przechowuje wskaźnik do kolejnej komórki.
 W konsekwencji, aby dostać się do *i*-tego elementu musimy przejść przez *i*−1 elementów go poprzedzających.
 - [`std::deque`](https://en.cppreference.com/w/cpp/container/deque) - dwukierunkowa kolejka (możemy dodawać elementy na końcu i na początku).
 Typowe implementacje alokują pamięć blokami (np. na 16 elementów, nie na 1).
@@ -63,6 +63,7 @@ Warto zaznaczyć, że tak naprawdę `push_back` woła `emplace_back` - wykorzyst
 ### Indeksowanie
 Indeksowanie po wektorze odbywa się przy pomocy operatora `[ ]`, dokładnie tak jak po zwykłej tablicy.
 Sięgnięcie poza zakres (`v[i]`, gdzie `i >= v.size()`) jest nielegalne (zachowanie analogiczne do tradycyjnej tablicy).
+Wektor trawersować możemy także używając iteratorów, ale o tym później.
 
 ### Usuwanie elementów
 Ostatni element wektora możemy usunąć przy pomocy metody `pop_back`.
@@ -106,4 +107,24 @@ Zmodyfikuj program tak, aby podanie do konsoli konkretnej wartości (np. "pop") 
 #### Zadanie 6
 Zweryfikuj poprawne wykonanie poprzedniego zadania wyświetlając imiona osób zawartych w wektorze.
 
+## `std::list`
+Lista jest jedną z najprostszych struktur danych.
+Składa się ona z węzłów (ang. *node*) - każdy węzeł przechowuje 1 element oraz wskaźnik do kolejnego węzła (ostatni węzeł wskazuje na `nullptr`).
+Jeżeli węzły przechowują także wskaźnik do poprzedniego węzła, mówimy o liście dwukierunkowej.
+Pomocna w zrozumieniu tej struktury danych może być następująca wizualizacja rozkładu w pamięci elementów listy jednokierunkowej:
+
+[!list.png](graphics/list.png)
+
 ## Iteratory
+
+
+- forward iterator - metody `begin()` i `end()`
+- reverse iterator - metody `rbegin()` i `rend()`
+- `const` forward iterator - metody `cbegin()` i `cend()`
+- `const` reverse iterator - metody `crbegin()` i `crend()`
+
+[!iterators.png](graphics/iterators.png)
+
+### `auto`
+
+### Range-based `for` loop
