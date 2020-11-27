@@ -34,11 +34,12 @@ Pod maską, wektor składa się tak naprawdę z 3 pól: wskaźnika do pierwszego
 Kontener zbliżony do wektora poznaliśmy już na 2. laboratorium - wtedy pisaliśmy go sami.
 
 ### Tworzenie i niszczenie wektora
-Najczęściej korzystamy z poniższych 3 konstruktorów wektora typu `std::vector<T>`:
+Najczęściej korzystamy z poniższych konstruktorów wektora typu `std::vector<T>`:
 1. konstruktor domyślny - tworzy pusty wektor
 2. konstruktor przyjmujący `unsigned int` - tworzy wektor o rozmiarze równym podanej liczbie, wypełniony elementami skonstruowanymi przy pomocy konstruktora domyślnego klasy T (jeżeli takiego nie ma nasz kod się nie skompiluje)
 3. konstruktor przyjmujący `unsigned int` i obiekt typu `T` - wypełnia wektor liczbą kopii przyjętego obiektu równą podanej liczbie
 4. konstruktor przyjmujący listę (w znaczeniu `std::initializer_list`) elementów, które mają zostać do niego podane
+5. konstruktory kopiujące is przenoszące
 
 Destruktor wektora poprawnie dealokuje pamięć, a w konsekwencji niszczy wszystkie zawarte w nim obiekty.
 Zachowanie to jest zgodne z naszymi oczekiwaniami i pozwala nam skupić się na ważniejszych rzeczach; nie musimy martwić się o wołanie `delete[ ]`.
@@ -115,12 +116,63 @@ Pomocna w zrozumieniu tej struktury danych może być następująca wizualizacja
 
 ![list.png](graphics/list.png)
 
+Jak widać, możemy dodawać nowe elementy na dowolnej pozycji listy (z przodu, z tyłu, gdzieś w środku) bez konieczności przesuwania elementów już istniejących.
+Ceną, którą płacimy za tę wygodę jest czas dostępu do elementów - aby dostać się do *i*-tego elementu, musimy przejść przez *i* - 1 elementów go poprzedzających.
+
+Listy są tematem, na który moglibyśmy poświęcić osobne zajęcia.
+Tutaj przytaczamy je jedynie dla kontrastu z wektorem, aby zobrazować, że biblioteka standardowa zapewnia podobny interfejs dla drastycznie różniących się kontenerów.
+
+### Tworzenie i niszczenie listy
+Na zajęciach rozważymy jedynie konstruktor domyślny, tworzący pustą listę.
+Jak nietrudno się domyślić, destruktor listy niszczy wszystkie jej węzły, dzięki czemu nie doznajemy wycieku pamięci.
+
+### Dodawanie elementów do listy
+Na zajęciach pominiemy dodawanie elementów w środku listy (choć nie jest szczególnie skomplikowane, zainteresowanych odsyłamy do dokumentacji metody `insert`).
+Rozważymy następujące 4 metody służące do dodawania elementów na końcach:
+- `push_back`
+- `emplace_back`
+- `push_front`
+- `emplace_front`
+
+Ich działanie jest analogiczne wobec metod szablonu `std::vector`.
+Jak widzimy ujednolicone nazewnictwo pomaga nam przy poznawaniu nowych kontenerów - nie musimy za każdym razem uczyć się nowych nazw metod.
+
+### Dostęp do elementów listy
+Dostęp do elementów listy uzyskujemy przeważnie przy pomocy iteratorów (o których powiemy niżej).
+Na chwilę obecną ograniczymy się do metod `front` i `back`, które zwracają referencję odpowiednio do pierwszego i ostatniego elementu listy.
+
+### Usuwanie elementów z listy
+Pierwszy i ostatni element listy możemy usunąć odpowiednio przy użyciu metod `pop_front` i `pop_back`.
+Metodę `erase`, usuwającą elementy ze środka listy, pozostawiamy dla chętnych.
+
+#### Zadanie 7
+Stwórz pustą listę typu `int`.
+Dodaj do niej 1 element.
+Wydrukuj pierwszy i ostatni element listy.
+
+#### Zadanie 8
+Dodaj do listy drugi element (z przodu lub z tyłu).
+Wydrukuj je ponownie.
+
+#### Zadanie 9
+Wydrukuj adresy pierwszego i ostatniego elementu.
+Czy są one blisko siebie?
+
+#### Zadanie 10
+Dodaj z przodu listy kilka elementów.
+Czy zmienił się adres ostatniego elementu?
+Dlaczego tak/nie?
+
+#### Zadanie 11
+Sprawdź, czy lista ma zdefiniowany operator nawiasów kwadratowych (indeksowania)?
+Jak sądzisz, dlaczego tak jest?
+
 ## Iteratory
+Jak zobaczyliśmy w zadaniu 11, 
 
-
-- forward iterator - metody `begin()` i `end()`
+- (forward) iterator - metody `begin()` i `end()`
 - reverse iterator - metody `rbegin()` i `rend()`
-- `const` forward iterator - metody `cbegin()` i `cend()`
+- `const` (forward) iterator - metody `cbegin()` i `cend()`
 - `const` reverse iterator - metody `crbegin()` i `crend()`
 
 ![iterators.png](graphics/iterators.png)
