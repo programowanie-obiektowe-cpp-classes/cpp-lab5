@@ -113,7 +113,7 @@ Składa się ona z węzłów (ang. *node*) - każdy węzeł przechowuje 1 elemen
 Jeżeli węzły przechowują także wskaźnik do poprzedniego węzła, mówimy o liście dwukierunkowej.
 Pomocna w zrozumieniu tej struktury danych może być następująca wizualizacja rozkładu w pamięci elementów listy jednokierunkowej:
 
-[!list.png](graphics/list.png)
+![list.png](graphics/list.png)
 
 ## Iteratory
 
@@ -123,7 +123,7 @@ Pomocna w zrozumieniu tej struktury danych może być następująca wizualizacja
 - `const` forward iterator - metody `cbegin()` i `cend()`
 - `const` reverse iterator - metody `crbegin()` i `crend()`
 
-[!iterators.png](graphics/iterators.png)
+![iterators.png](graphics/iterators.png)
 
 ### `auto`
 
