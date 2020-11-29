@@ -17,8 +17,8 @@ TEST_CASE("Zaliczenie", "[]")
         return static_cast< bool >(d(RandomIntGenerator::prng));
     };
 
-    constexpr size_t   age = 42;
-    std::list< Human > ppl;
+    constexpr unsigned int age = 42;
+    std::list< Human >     ppl;
     std::generate_n(std::back_inserter(ppl), n_ppl, [&]() {
         return Human{get_random_name(), age, rbg(), rbg()};
     });
