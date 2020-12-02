@@ -264,7 +264,7 @@ std::vector<int> v{1, 2, 3};
 for (auto it = v.begin(); it != v.end(); ++it)
     std::cout << *it;
 ```
-Jeżeli kontener wspiera metody `begin` i `end`, możemy powyższy od zastąpić:
+Jeżeli kontener wspiera metody `begin` i `end`, możemy powyższy kod zastąpić:
 ```C++
 std::vector<int> v{1, 2, 3};
 for(int e : v)
