@@ -170,13 +170,13 @@ Jak sądzisz, dlaczego tak jest?
 ## Iteratory
 Jak zobaczyliśmy w zadaniu 11, lista nie ma zdefiniowanego operatora `[ ]`.
 Aby dostać się do jej elementów, musimy użyć iteratorów.
-Iterator jest w pewnym koncepcyjnie podobny do wskaźnika, gdyż jego zadaniem jest wskazywanie na elementy kontenera (nie tylko listy).
+Iterator jest koncepcyjnie podobny do wskaźnika, gdyż jego zadaniem jest wskazywanie na elementy kontenera (nie tylko listy).
 Iteratorem nazywamy obiekt klasy, która ma zdefiniowane następujące operatory:
 - operator dereferencji (`*`) - dereferencjonując operator uzyskujemy dostęp do elementu, na który wskazuje
 - (opcjonalnie) operator `->` - pozwala na dostęp do pól i metod elementów (zdefiniowany dla naszej wygody, możemy to także osiągnąć przy pomocy operatora dereferencji)
 - operator pre- lub post-inkrementacji (`++`) - po inkrementacji, iterator wskazuje na następny element kontenera
 - operatory porównania (`==`, `!=`) - porównują, czy dwa iteratory wskazują na ten sam element
-- (opcjonalnie) operator pre- lub post-dekrementacji (`--`) - wtedy nazywamy operator dwukierunkowym (*bidirectional*), pełni on rolę analogiczną do operatora `++`
+- (opcjonalnie) operator pre- lub post-dekrementacji (`--`) - wtedy nazywamy iterator dwukierunkowym (*bidirectional*), pełni on rolę analogiczną do operatora `++`
 - (opcjonalnie) operator `+` lub `+=` przyjmujący liczbę całkowitą - wtedy nazywamy go iteratorem losowego dostępu (*random access*), operator ten pozwala nam przesunąć iterator do przodu lub do tyłu o dowolną liczbę elementów
 
 Jeżeli przyjrzymy się powyższej specyfikacji, możemy dostrzec, że wskaźniki są iteratorami losowego dostępu.
