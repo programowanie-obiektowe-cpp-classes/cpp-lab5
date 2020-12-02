@@ -182,8 +182,8 @@ Iteratorem nazywamy obiekt klasy, która ma zdefiniowane następujące operatory
 Jeżeli przyjrzymy się powyższej specyfikacji, możemy dostrzec, że wskaźniki są iteratorami losowego dostępu.
 Kontenerem, na elementy którego wskazują, jest cała przestrzeń pamięci naszego komputera (podobieństwo do nazwy RAM jest nieprzypadkowe!).
 
-Nas będą jednak iteratory odpowiadające konkretnym kontenerom.
-Wszystkie kontenery STL posiadaja zdefiniowane wewnątrz klasy iteratorów.
+Nas będą jednak interesowały iteratory odpowiadające konkretnym kontenerom.
+Wszystkie kontenery STL posiadaja zdefiniowane wewnątrz siebie klasy iteratorów.
 Na przykład, najprostszym iteratorem wektora elementów typu `T` jest klasa `std::vector<T>::iterator`.
 Sam typ nie jest oczywiście wystarczający - potrzebujemy konkretnych obiektów.
 Do ich otrzymania służą metody kontenerów: `begin` i `end` (oraz ich dodatkowe odmiany, o których niżej).
