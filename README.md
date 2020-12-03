@@ -214,7 +214,7 @@ W zadaniu 14 nieco niewygodna była konieczność indeksowania od iteratora popr
 Prowadzi ona do dość subtelnego bugu: gdyby nasza lista była pusta, mielibyśmy nieskończoną pętle!
 Jeżeli kontener jest pusty, to iterator do pierwszego elementu oraz **za** pierwszy element są równe.
 Dekrementacja iteratora poprzedzającego `list.end()` nie doprowadzi zatem nigdy do iteratora `list.begin()`.
-Ponieważ problem trawersowania kontenerów od końca jest dość powszechny, biblioteka standardowa oferuje mechanizm, który to ułatwia: iteratory odwrotne (``*reverse iterator*).
+Ponieważ problem trawersowania kontenerów od końca jest dość powszechny, biblioteka standardowa oferuje mechanizm, który to ułatwia: iteratory odwrotne (*reverse iterator*).
 Ideę ich działania zobrazowano poniżej.
 
 ![iterators.png](graphics/iterators.png)
