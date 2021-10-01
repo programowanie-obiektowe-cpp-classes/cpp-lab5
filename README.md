@@ -36,13 +36,13 @@ Kontener zbliżony do wektora poznaliśmy już na 2. laboratorium - wtedy pisali
 ### Tworzenie i niszczenie wektora
 Najczęściej korzystamy z poniższych konstruktorów wektora typu `std::vector<T>`:
 1. konstruktor domyślny - tworzy pusty wektor
-2. konstruktor przyjmujący `unsigned int` - tworzy wektor o rozmiarze równym podanej liczbie, wypełniony elementami skonstruowanymi przy pomocy konstruktora domyślnego klasy T (jeżeli takiego nie ma nasz kod się nie skompiluje)
+2. konstruktor przyjmujący `unsigned int` - tworzy wektor o rozmiarze równym podanej liczbie, wypełniony elementami skonstruowanymi przy pomocy konstruktora domyślnego klasy T (jeżeli takiego nie ma, to nasz kod się nie skompiluje)
 3. konstruktor przyjmujący `unsigned int` i obiekt typu `T` - wypełnia wektor liczbą kopii przyjętego obiektu równą podanej liczbie
 4. konstruktor przyjmujący listę (w znaczeniu `std::initializer_list`) elementów, które mają zostać do niego podane
 5. konstruktory kopiujące is przenoszące
 
 Destruktor wektora poprawnie dealokuje pamięć, a w konsekwencji niszczy wszystkie zawarte w nim obiekty.
-Zachowanie to jest zgodne z naszymi oczekiwaniami i pozwala nam skupić się na ważniejszych rzeczach; nie musimy martwić się o wołanie `delete[ ]`.
+Zachowanie to jest zgodne z naszymi oczekiwaniami i pozwala nam skupić się na ważniejszych rzeczach; nie musimy martwić się o wołanie `delete[]`.
 
 ### Dodawanie elementów do wektora
 Nowe elementy dodajemy do wektora przy pomocy metod `push_back` oraz `emplace_back`.
