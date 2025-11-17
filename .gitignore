@@ -33,3 +33,9 @@
 
 # Build dir
 zal/build/*
+
+# Common IDE directories
+build/
+out/
+.vs/
+.vscode/
